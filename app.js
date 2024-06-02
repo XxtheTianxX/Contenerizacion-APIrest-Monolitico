@@ -1,23 +1,26 @@
-const express = require('express');
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const dotenv = require('dotenv').config()
 
+const { mongoConn } = require('./databases/configuration')
 
-const app = express();
-const {  mongoConn } = require('./databases/configuration');
+// middlewares
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+app.use(cors({
+    origin: '*'
+}))
+
 mongoConn()
 
-const cors = require('cors');
+const tipoProyectos = require('./routes/tipoProyecto')
+const clientes = require('./routes/cliente')
 
-const tiposProyecto = require('./routes/tipoProyecto');
 
-const proyectos = require('./routes/proyecto');
+// middlewares
+app.use('/api/tiposproyectos', tipoProyectos)
+app.use('/api/clientes', clientes)
 
-//middlewares
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
-app.use(cors());
 
-app.use('/api/tiposproyectos', tiposProyecto);
-app.use('/api/proyectos', proyectos);
-
-module.exports = app;
-
+module.exports = app

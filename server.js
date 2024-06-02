@@ -1,12 +1,7 @@
-const dotenv = require('dotenv').config();
-const app = require('./app');
+const app = require('./app')
 
+app.set('port', process.env.PORT || 3000)
 
-// configuraciones
-app.set('port', process.env.PORT || 3000);
-
-
-// escucha
 app.listen(app.get('port'), () => {
-    console.log(`Arranca el servidor en el puerto: ${app.get('port')}`)
-});
+    console.log(`arrancó por puerto: ${app.get('port')}`)
+})
