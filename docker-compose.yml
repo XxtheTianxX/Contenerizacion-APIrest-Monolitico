@@ -5,12 +5,12 @@ services :
     build :
       context : .
     ports :
-      - "4002:4002"
+      - "4001:4001"
     networks : 
       - proyectos-app
     environment :
       - MONGO_URI=${MONGO_URI}
-      - PORT=4002
+      - PORT=4001
 networks :
   proyectos-app :
 
